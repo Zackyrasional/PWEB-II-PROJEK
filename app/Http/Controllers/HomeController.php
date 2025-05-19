@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $totalTransactions = auth()->user()->transactions()->count();
+        $totalTransactions = $request->user()->transactions()->count();
         return view('home', compact('totalTransactions'));
     }
 }

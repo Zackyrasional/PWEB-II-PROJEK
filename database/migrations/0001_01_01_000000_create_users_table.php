@@ -16,11 +16,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('role')->default('user'); // diperbaiki: hilangkan after()
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users'); // diperbaiki: hapus dropColumn
     }
 }

@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = auth()->user();
+        $user = $request->user();
         
         $totalIncome = $user->transactions()
             ->where('type', 'income')

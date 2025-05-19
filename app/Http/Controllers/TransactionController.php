@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = auth()->user()->transactions()->latest()->get();
+        $transactions = $request->user()->transactions()->latest()->get();
         return view('transactions.index', compact('transactions'));
     }
 
@@ -28,7 +28,7 @@ class TransactionController extends Controller
             'date' => 'required|date'
         ]);
 
-        auth()->user()->transactions()->create($request->all());
+        $request->user()->transactions()->create($request->all());
 
         return redirect()->route('transactions.index');
     }

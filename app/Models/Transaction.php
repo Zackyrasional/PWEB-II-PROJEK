@@ -9,22 +9,23 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    // Kolom yang boleh diisi secara mass-assignment
     protected $fillable = [
+        'user_id',
         'type',
         'amount',
         'description',
         'date',
-        'user_id'
+        'status' // jika kamu memang menggunakan status
+        
     ];
 
-        // Tambahkan ini untuk casting date
-    protected $dates = ['date'];
-    
-    // atau menggunakan casts array
+    // Cast kolom 'date' agar otomatis jadi objek Carbon
     protected $casts = [
-        'date' => 'date'
+        'date' => 'date',
     ];
 
+    // Relasi ke model User (satu transaksi dimiliki oleh satu user)
     public function user()
     {
         return $this->belongsTo(User::class);
